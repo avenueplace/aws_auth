@@ -1,6 +1,13 @@
 AWSAuth
 =======
 
+[![build](https://github.com/avenueplace/aws_auth/actions/workflows/build.yml/badge.svg)](https://github.com/avenueplace/aws_auth/actions/workflows/build.yml)
+
+> This project was forked from [bryanjos/aws_auth] and its maintenance is
+> focused on our internal usage at Avenue. Feel free to use it as is, and reach
+> out to us through an issue or pull-request. We'll gladly consider your
+> suggestions and contributions.
+
 A small library used to sign AWS request urls using AWS Signature Version 4.
 
 Takes some inspiration from the [Simplex](https://github.com/adamkittelson/simplex) Library.
@@ -119,3 +126,28 @@ signed_request = AWSAuth.sign_authorization_header("AKIAIOSFODNN7EXAMPLE", "wJal
   ~N[2013-05-24 00:00:00])
 "AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20130524/us-east-1/s3/aws4_request,SignedHeaders=date;host;x-amz-content-sha256;x-amz-date;x-amz-storage-class,Signature=98ad721746da40c64f1a55b78f14c238d841ea1380cd77a1b5971af0ece108bd"
 ```
+
+## Differences from [bryanjos/aws_auth]
+
+The main project hasn't seen updates in a while so this version merges a set
+of PRs proposed by other users that fix a fair few issues. If and when they have
+been merged, we urge everyone to use [bryanjos/aws_auth]:
+
+- [#44 - Add support for new `:crypto.mac/4` function and keep back compatibility with the old `:crypto.hmac/3`](https://github.com/bryanjos/aws_auth/pull/44) - by [@rzcastilho]
+- [#42 - Preserve casing of service name](https://github.com/bryanjos/aws_auth/pull/42) - by [@dallagi]
+- [#40 - Replace `+` by `%20` in path](https://github.com/bryanjos/aws_auth/pull/40) - by [@nmichel]
+
+## Attribution
+
+Forked from [bryanjos/aws_auth].
+
+Some code ported from [rzcastilho/aws_auth], [dallagi/aws_auth] and
+[nmichel/aws_auth].
+
+[bryanjos/aws_auth]: https://github.com/bryanjos/aws_auth
+[rzcastilho/aws_auth]: https://github.com/rzcastilho/aws_auth
+[dallagi/aws_auth]: https://github.com/dallagi/aws_auth
+[nmichel/aws_auth]: https://github.com/nmichel/aws_auth
+[@rzcastilho]: https://github.com/rzcastilho
+[@dallagi]: https://github.com/dallagi
+[@nmichel]: https://github.com/nmichel
