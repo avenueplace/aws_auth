@@ -5,12 +5,12 @@ defmodule AWSAuth.Utils do
     query_params = URI.encode_query(params) |> String.replace("+", "%20")
 
     header_params =
-      Enum.map(headers, fn {key, value} -> "#{String.downcase(key)}:#{String.trim(value)}" end)
+      Stream.map(headers, fn {key, value} -> "#{String.downcase(key)}:#{String.trim(value)}" end)
       |> Enum.sort(&(&1 < &2))
       |> Enum.join("\n")
 
     signed_header_params =
-      Enum.map(headers, fn {key, _} -> String.downcase(key) end)
+      Stream.map(headers, fn {key, _} -> String.downcase(key) end)
       |> Enum.sort(&(&1 < &2))
       |> Enum.join(";")
 
@@ -22,8 +22,7 @@ defmodule AWSAuth.Utils do
     encoded_path =
       path
       |> String.split("/")
-      |> Enum.map(fn segment -> URI.encode_www_form(segment) end)
-      |> Enum.join("/")
+      |> Enum.map_join("/", fn segment -> URI.encode_www_form(segment) end)
       |> String.replace("+", "%20")
 
     "#{http_method}\n#{encoded_path}\n#{query_params}\n#{header_params}\n\n#{signed_header_params}\n#{hashed_payload}"
