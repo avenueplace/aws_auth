@@ -12,6 +12,20 @@ A small library used to sign AWS request urls using AWS Signature Version 4.
 
 Takes some inspiration from the [Simplex](https://github.com/adamkittelson/simplex) Library.
 
+- [Installation](#installation)
+- [Usage](#usage)
+- [Differences from `bryanjos/aws_auth`](#differences-from-bryanjosaws_auth)
+
+## Installation
+
+Just add to your `mix.exs`
+
+```elixir
+{:aws_auth, github: "avenueplace/aws_auth", tag: "0.8.0"},
+```
+
+## Usage
+
 Does both URL and Authorization Header signing.
 
 `AWSAuth.sign_url(access_key, secret_key, http_method, url, region, service, headers \\ Map.new)`
@@ -52,7 +66,6 @@ signed_request = AWSAuth.sign_url("AKIAIOSFODNN7EXAMPLE", "wJalrXUtnFEMI/K7MDENG
   Map.new |> Map.put("x-amz-header","value"))
 "https://examplebucket.s3.amazonaws.com/test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIOSFODNN7EXAMPLE%2F20141219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20141219T153646Z&X-Amz-Expires=86400&X-Amz-Signature=b05688cc482398bf2d6ff4068560b85b310a6bb24c5d21711b7099ab5e3df510&X-Amz-SignedHeaders=host,x-amx-header"
 ```
-
 
 Using the example from AWS (http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
 
