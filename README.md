@@ -1,11 +1,10 @@
-AWSAuth
-=======
+# AWSAuth
 
-[![build](https://github.com/avenueplace/aws_auth/actions/workflows/build.yml/badge.svg)](https://github.com/avenueplace/aws_auth/actions/workflows/build.yml)
+[![build](https://github.com/frm/aws_auth/actions/workflows/build.yml/badge.svg)](https://github.com/frm/aws_auth/actions/workflows/build.yml)
 
 > This project was forked from [bryanjos/aws_auth] and its maintenance is
-> focused on our internal usage at Avenue. Feel free to use it as is, and reach
-> out to us through an issue or pull-request. We'll gladly consider your
+> focused on my personal and professional usage. Feel free to use it as is, and
+> reach out through an issue or pull-request. I'll gladly consider your
 > suggestions and contributions.
 
 A small library used to sign AWS request urls using AWS Signature Version 4.
@@ -21,7 +20,7 @@ Takes some inspiration from the [Simplex](https://github.com/adamkittelson/simpl
 Just add to your `mix.exs`
 
 ```elixir
-{:aws_auth, github: "avenueplace/aws_auth", tag: "0.8.0"},
+{:aws_auth, github: "frm/aws_auth", tag: "0.8.0"},
 ```
 
 ## Usage
@@ -42,7 +41,7 @@ Does both URL and Authorization Header signing.
 
 `service`: The AWS service you are trying to access (i.e. s3). Check the url above for names as well.
 
-`headers` (optional): The headers that will be used in the request. Used for signing the request. For signing, host is the only one required unless using any other x-amx-* headers. If host is present here, it will override using the host in the url to attempt signing. If only the host is needed, then you don't have to supply it and the host from the url will be used.
+`headers` (optional): The headers that will be used in the request. Used for signing the request. For signing, host is the only one required unless using any other x-amx-\* headers. If host is present here, it will override using the host in the url to attempt signing. If only the host is needed, then you don't have to supply it and the host from the url will be used.
 
 In most cases, you would probably call it like this (examples using the example access key and secret from AWS):
 
@@ -80,7 +79,6 @@ signed_request = AWSAuth.sign_url("AKIAIOSFODNN7EXAMPLE", "wJalrXUtnFEMI/K7MDENG
 "https://examplebucket.s3.amazonaws.com/test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIOSFODNN7EXAMPLE%2F20130524%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20130524T000000Z&X-Amz-Expires=86400&X-Amz-Signature=aeeed9bbccd4d02ee5c0109b86d86835f995330da4c265957d157751f604d404&X-Amz-SignedHeaders=host"
 ```
 
-
 `AWSAuth.sign_authorization_header(access_key, secret_key, http_method, url, region, service, headers \\ Map.new, payload \\ "")`
 
 `access_key`: Your AWS Access key
@@ -96,14 +94,13 @@ signed_request = AWSAuth.sign_url("AKIAIOSFODNN7EXAMPLE", "wJalrXUtnFEMI/K7MDENG
 `service`: The AWS service you are trying to access (i.e. s3). Check the url above for names as well.
 
 `headers` (optional. defaults to `Map.new`): The headers that will be used in the request. Used for signing the request.
-For signing, host is the only one required unless using any other x-amx-* headers.
+For signing, host is the only one required unless using any other x-amx-\* headers.
 If host is present here, it will override using the host in the url to attempt signing.
 Same goes for the x-amz-content-sha256 headers
 If only the host and x-amz-content-sha256 headers are needed, then you don't have to supply it and the host from the url will be used and
 the payload will be hashed to get the x-amz-content-sha256 header.
 
 `payload` (optional. defaults to `""`): The contents of the payload if there is one.
-
 
 ```elixir
 headers = Map.new
@@ -144,7 +141,7 @@ signed_request = AWSAuth.sign_authorization_header("AKIAIOSFODNN7EXAMPLE", "wJal
 
 The main project hasn't seen updates in a while so this version merges a set
 of PRs proposed by other users that fix a fair few issues. If and when they have
-been merged, we urge everyone to use [bryanjos/aws_auth]:
+been merged, I urge everyone to use [bryanjos/aws_auth]:
 
 - [#44 - Add support for new `:crypto.mac/4` function and keep back compatibility with the old `:crypto.hmac/3`](https://github.com/bryanjos/aws_auth/pull/44) - by [@rzcastilho]
 - [#42 - Preserve casing of service name](https://github.com/bryanjos/aws_auth/pull/42) - by [@dallagi]
